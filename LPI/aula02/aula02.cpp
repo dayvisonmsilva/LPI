@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
       std::getline(std::cin, mensagem);
       std::cout << "Mensagem adicionada: " << mensagem << std::endl;
 
-      arquivo_saida << message << std::endl;
+      arquivo_saida << mensagem << std::endl;
     }
   }
 
