@@ -29,5 +29,7 @@ int main(int argc, char *argv[]) {
     }
   }
   
+  arquivo_saida.close();
+
   return 0;
 }
