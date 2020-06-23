@@ -1,35 +1,34 @@
 #include <iostream>
 #include <string>
-#include <fstream>
+
+void show_usage(const std::string &prog_name);
 
 int main(int argc, char *argv[]) {
-  std::ofstream arquivo_saida{"mensagem.txt", std::ios::app};
-
-  if (argc <= 1) {
-    std::cout << "Uso: " << argv[0] << " add <mensagem>";
-    return -1;
-  }
- 
-  if (argc == 2){
-    if (std::string(argv[1]) == "add")  {
-      std::string mensagem;
-       
-      std::cout << "Digite uma mensagem: " << std::endl;
-      std::getline(std::cin, mensagem);
-      std::cout << "Mensagem adicionada: " << mensagem << std::endl;
-
-      arquivo_saida << mensagem << std::endl;
-    }
+  if (argc == 1) {
+    show_usage(argv[0]);
+    return 1;
   }
 
-  if (argc == 3) {
-    if (std::string(argv[1]) == "add")  {
-      std::cout << "Mensagem adicionada: " << argv[2];
-      arquivo_saida << argv[2] << std::endl;
-    }
+  std::string action = argv[1];
+
+  if (action != "add") {
+    show_usage(argv[0]);
+    return 1;
+  }
+
+  std::string message;
+  if (argc == 2) {
+    std::cout << "Informe a mensagem: " << std::endl;
+    std::getline(std::cin, message);
+  } else {
+    message = argv[2];
   }
   
-  arquivo_saida.close();
-
+  std::cout << "Mensagem adicionada" << std::endl;
+  
   return 0;
+}
+
+void show_usage(const std::string &prog_name) {
+  std::cout << "Uso: " << prog_name << " add <mensagem>" << std::endl;
 }

@@ -3,26 +3,41 @@
 #include <fstream>
 
 void show_usage(const std::string &prog_name);
+int add(int argc, const std::string &mensagem_adicionada);
 void list();
 
 int main(int argc, char *argv[]) {
-
-  std::cout << "PARTE 0: " << std::endl;
+  std::cout << " --------------------- DIÁRIO --------------------" << std::endl;
   if (argc == 1) {
     show_usage(argv[0]);
     return 1;
   }
 
   std::string action = argv[1];
-  std::cout << "PARTE 1: " << std::endl;
-  std::cout << action << std::endl;
-
-  if (action == "add") {
+  if (action != "add" && action != "list") {
     show_usage(argv[0]);
     return 1;
   }
 
-  std::cout << "PARTE 2: " << std::endl;
+  if (action == "add") {
+    add(argc, argv[2]);
+  } 
+  
+  if (action == "list") {
+    list();
+  }
+  
+  return 0;
+}
+
+void show_usage(const std::string &prog_name) {
+  std::cout << " --------------- LISTA DE COMANDOS ---------------" << std::endl;
+  std::cout << "Para utilizar o programa digite " << prog_name << " e um dos seguintes comandos: " << std::endl;
+  std::cout << "1. add <mensagem>:  adiciona a <mensagem>;" << std::endl;
+  std::cout << "2. list: lista as mensagems já cadastradas;"  << std::endl;
+}
+
+int add(int argc, const std::string &mensagem_adicionada) {
   std::string mensagem;
   if (argc == 2){
     std::cout << "Digite uma mensagem: " << std::endl;
@@ -30,7 +45,7 @@ int main(int argc, char *argv[]) {
   }
 
   if (argc == 3) {
-    mensagem = argv[2];
+    mensagem = mensagem_adicionada;
   }
   
   std::ofstream arquivo_saida("mensagem.txt", std::ios::app);
@@ -44,17 +59,10 @@ int main(int argc, char *argv[]) {
   arquivo_saida.close();
 
   std::cout << "Mensagem Adicionada" << std::endl;
-
-  list();
-
-  return 0;
-}
-
-void show_usage(const std::string &prog_name) {
-  std::cout << "Uso: " << prog_name << " add <mensagem>" << std::endl;
 }
 
 void list() {
+  std::cout << "MENSAGENS: " << std::endl;
   std::ifstream arquivo_entrada("mensagem.txt");
 
   std::string message;
