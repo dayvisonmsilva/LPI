@@ -46,7 +46,7 @@ void show_usage(const std::string &prog_name) {
   std::cout << " --------------- LISTA DE COMANDOS ---------------" << std::endl;
   std::cout << "Para utilizar o programa digite " << prog_name << " e um dos seguintes comandos: " << std::endl;
   std::cout << "1. add <mensagem>:  adiciona a <mensagem>;" << std::endl;
-  std::cout << "2. list: lista as mensagems já cadastradas;"  << std::endl;
+  std::cout << "2. list: lista as mensagens já cadastradas;"  << std::endl;
 }
 
 int add(int argc, const std::string &mensagem_adicionada) {
